@@ -7,5 +7,5 @@ project(EnhancedDatabase)
 # Include the directory headers are located
 include_directories(${CMAKE_SOURCE_DIR}/include)
 # Add the main executable
-add_executable(EnhancedDatabase src/db.cpp src/main.cpp)
+add_executable(EnhancedDatabase src/db.cpp)
 
