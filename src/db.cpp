@@ -58,6 +58,9 @@ void* Database::operator new(size_t size) {
 	if (!ptr) {
 		throw std::bad_alloc();
 	}
+	if (instance) {
+		instance->refreshConnection();
+	}
 	return ptr;
 }
 
@@ -65,6 +68,9 @@ void* Database::operator new(size_t size) {
 void Database::operator delete(void* pt) {
 	std::cout << "overloaded delete ";
 	std::free(pt);
+	if (instance) {
+		instance->refreshConnection();
+	}
 }
 
 // sets the username member variable
