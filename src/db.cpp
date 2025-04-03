@@ -58,19 +58,17 @@ void* Database::operator new(size_t size) {
 	if (!ptr) {
 		throw std::bad_alloc();
 	}
-	if (instance) {
-		instance->refreshConnection();
-	}
 	return ptr;
 }
 
 // override the delete operator with another definition
 void Database::operator delete(void* pt) {
 	std::cout << "overloaded delete ";
-	std::free(pt);
 	if (instance) {
 		instance->refreshConnection();
 	}
+	std::free(pt);
+
 }
 
 // sets the username member variable
@@ -126,7 +124,8 @@ void Database::operator=(Database&& db)
 }
 
 bool Database::isTimeout() {
-	return (std::difftime(last_activity, std::time(0)) > TIMEOUT);
+	std::cout << std::difftime(std::time(0), last_activity);
+	return (std::difftime(std::time(0), last_activity) > TIMEOUT);
 }
 
 void Database::refreshConnection() {
