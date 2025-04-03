@@ -120,7 +120,7 @@ void Database::operator=(Database&& db)
 }
 
 bool Database::isTimeout() {
-	return (std::difftime(last_activity, std::time(0)) >= TIMEOUT);
+	return (std::difftime(last_activity, std::time(0)) > TIMEOUT);
 }
 
 void Database::refreshConnection() {
